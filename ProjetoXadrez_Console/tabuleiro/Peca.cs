@@ -8,10 +8,15 @@ internal class Peca
 
     public Peca(Cor cor, Tabuleiro tab)
     {
-        this.posicao = null;
+        posicao = null;
         this.cor = cor;
-        this.qteMovimentos = 0;
+        qteMovimentos = 0;
         this.tab = tab;
+    }
+
+    public void incrementarQteMovimentos()
+    {
+        qteMovimentos++;
     }
 }
 

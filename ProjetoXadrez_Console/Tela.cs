@@ -1,4 +1,5 @@
 ﻿using tabuleiro;
+using xadrez;
 
 namespace ProjetoXadrez_Console;
 internal class Tela
@@ -13,6 +14,13 @@ internal class Tela
             {
                 if (tab.peca(i, j) == null)
                 {
+                    /*if ((i + j) % 2 == 0)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                    }
+                    else
+                        Console.BackgroundColor = ConsoleColor.Black;*/
+
                     Console.Write("- ");
                 }
                 else
@@ -20,22 +28,41 @@ internal class Tela
                     Tela.imprimirPeca(tab.peca(i, j));
                     Console.Write(" ");
                 }
+                /*Console.BackgroundColor = ConsoleColor.Black;*/
             }
             Console.WriteLine();
         }
+        Console.ResetColor();
         Console.WriteLine("  a b c d e f g h");
+    }
+
+    public static PosicaoXadrez lerPosicaoXadrez()
+    {
+        string s = Console.ReadLine();
+        char coluna = s[0];
+        int linha = int.Parse(s[1] + "");
+
+        return new PosicaoXadrez(coluna, linha);
     }
 
     public static void imprimirPeca(Peca peca)
     {
         if (peca.cor == Cor.Branca)
+        {
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            /*Console.BackgroundColor = ConsoleColor.White;*/
             Console.Write(peca);
+            Console.ForegroundColor = aux;
+        }
         else
         {
+            ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkBlue;
+            /*Console.BackgroundColor = ConsoleColor.White;*/
             Console.Write(peca);
-            Console.ResetColor();
-        }    
+            Console.ForegroundColor = aux;
+        }
     }
 }
 
