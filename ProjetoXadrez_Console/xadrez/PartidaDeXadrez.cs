@@ -59,7 +59,7 @@ internal class PartidaDeXadrez
 
         // #Jogada Especial en passant
         if (p is Peao && origem.coluna != destino.coluna && pecaCapturada == null)
-            {
+        {
             Posicao posP;
             if (p.cor == Cor.Branca)
             {
@@ -125,10 +125,44 @@ internal class PartidaDeXadrez
     public void realizaJogada(Posicao origem, Posicao destino)
     {
         Peca pecaCapturada = executaMovimento(origem, destino);
+        Peca p = tab.peca(destino);
         if (estaEmXeque(jogadorAtual))
         {
             desfazMovimento(origem, destino, pecaCapturada);
             throw new TabuleiroException("Você não pode se colocar e/ou deixar se em xeque!");
+        }
+
+        // #JogadaEspecial Promocao
+        if (p is Peao)
+        {
+            if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7))
+            {
+                p = tab.retirarPeca(destino);
+                pecas.Remove(p);
+
+                Console.WriteLine("Informe a promoção: (D / B / T / C)");
+                char resp = char.Parse(Console.ReadLine().ToUpper());
+                Peca Promo = new Dama(tab, p.cor);
+                switch (resp)
+                {
+                    case 'D':
+                        Promo = new Dama(tab, p.cor);
+                        break;
+                    case 'B':
+                        Promo = new Bispo(tab, p.cor);
+                        break;
+                    case 'T':
+                        Promo = new Torre(tab, p.cor);
+                        break;
+                    case 'C':
+                        Promo = new Cavalo(tab, p.cor);
+                        break;
+                }
+
+                
+                tab.colocarPeca(Promo, destino);
+                pecas.Add(Promo);
+            }
         }
 
         if (estaEmXeque(adversaria(jogadorAtual)))
@@ -144,18 +178,19 @@ internal class PartidaDeXadrez
             mudaJogador();
         }
 
-        Peca p = tab.peca(destino);
 
         // #JogadaEspecial En Passant
-        if (p is Peao && (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2))
+        if (p is Peao)
         {
-            vuneravelEnPassant = p;
+            if (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2)
+            {
+                vuneravelEnPassant = p;
+            }
+            else
+            {
+                vuneravelEnPassant = null;
+            }
         }
-        else
-        {
-            vuneravelEnPassant = null;
-        }
-
     }
 
     public void validarPosicaoDeOrigem(Posicao pos)
@@ -291,7 +326,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 8, new Rei(tab, Cor.Preta, this));
         colocarNovaPeca('f', 8, new Bispo(tab, Cor.Preta));
         colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Preta));
-        colocarNovaPeca('h', 8, new Torre(tab, Cor.Preta));
+        colocarNovaPeca('h', 3, new Torre(tab, Cor.Preta));
         colocarNovaPeca('a', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('b', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('c', 7, new Peao(tab, Cor.Preta, this));
@@ -299,7 +334,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('f', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('g', 7, new Peao(tab, Cor.Preta, this));
-        colocarNovaPeca('h', 7, new Peao(tab, Cor.Preta, this));
+        colocarNovaPeca('h', 5, new Peao(tab, Cor.Preta, this));
 
         colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));
         colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Branca));
@@ -316,7 +351,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('f', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca, this));
-        colocarNovaPeca('h', 2, new Peao(tab, Cor.Branca, this));
+        colocarNovaPeca('h', 7, new Peao(tab, Cor.Branca, this));
 
     }
 }
