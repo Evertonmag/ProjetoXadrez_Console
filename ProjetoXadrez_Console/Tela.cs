@@ -6,29 +6,12 @@ internal class Tela
 {
     public static void imprimirTabuleiro(Tabuleiro tab)
     {
-
         for (int i = 0; i < tab.linhas; i++)
         {
             Console.Write(8 - i + " ");
             for (int j = 0; j < tab.colunas; j++)
             {
-                if (tab.peca(i, j) == null)
-                {
-                    /*if ((i + j) % 2 == 0)
-                    {
-                        Console.BackgroundColor = ConsoleColor.White;
-                    }
-                    else
-                        Console.BackgroundColor = ConsoleColor.Black;*/
-
-                    Console.Write("- ");
-                }
-                else
-                {
-                    Tela.imprimirPeca(tab.peca(i, j));
-                    Console.Write(" ");
-                }
-                /*Console.BackgroundColor = ConsoleColor.Black;*/
+                imprimirPeca(tab.peca(i, j));
             }
             Console.WriteLine();
         }
@@ -47,22 +30,62 @@ internal class Tela
 
     public static void imprimirPeca(Peca peca)
     {
-        if (peca.cor == Cor.Branca)
+        if (peca == null)
         {
-            ConsoleColor aux = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Red;
-            /*Console.BackgroundColor = ConsoleColor.White;*/
-            Console.Write(peca);
-            Console.ForegroundColor = aux;
+            Console.Write("- ");
         }
         else
         {
-            ConsoleColor aux = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            /*Console.BackgroundColor = ConsoleColor.White;*/
-            Console.Write(peca);
-            Console.ForegroundColor = aux;
+            if (peca.cor == Cor.Branca)
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                /*Console.BackgroundColor = ConsoleColor.White;*/
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
+            }
+            else
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                /*Console.BackgroundColor = ConsoleColor.White;*/
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
+            }
+            Console.Write(" ");
         }
+
+    }
+
+    public static void imprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
+    {
+        ConsoleColor fundoOriginal = Console.BackgroundColor;
+        ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
+
+        for (int i = 0; i < tab.linhas; i++)
+        {
+            Console.Write(8 - i + " ");
+            for (int j = 0; j < tab.colunas; j++)
+            {
+                if (posicoesPossiveis[i, j])
+                    Console.BackgroundColor = fundoAlterado;
+                else
+                    Console.BackgroundColor = fundoOriginal;
+                imprimirPeca(tab.peca(i, j));
+                Console.ResetColor();
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("  a b c d e f g h");
+        Console.ResetColor();
     }
 }
 
+/*if ((i + j) % 2 == 0)
+{
+    Console.BackgroundColor = ConsoleColor.White;
+}
+else
+    Console.BackgroundColor = ConsoleColor.Black;*/
+
+/*Console.BackgroundColor = ConsoleColor.Black;*/
