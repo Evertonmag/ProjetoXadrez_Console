@@ -9,12 +9,19 @@ internal class Tela
         imprimirTabuleiro(partida.tab);
         Console.WriteLine();
         imprimirPecasCapturadas(partida);
-        Console.WriteLine($"\n\nTurno: {partida.turno}" +
-                          $"\nAguardando Jogada: {partida.jogadorAtual}");
-        if (partida.xeque)
+        Console.WriteLine($"\n\nTurno: {partida.turno}");
+        if (!partida.terminada)
         {
-            Console.WriteLine("XEQUE!");
-
+            Console.WriteLine($"Aguardando Jogada: {partida.jogadorAtual}");
+            if (partida.xeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }
+        }
+        else
+        {
+            Console.WriteLine("XEQUEMATE!");
+            Console.WriteLine("Vencedor: " + partida.jogadorAtual);
         }
     }
 

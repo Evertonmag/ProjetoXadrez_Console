@@ -42,6 +42,8 @@ internal class Program
                     Console.ReadLine();
                 }
             }
+            Console.Clear();
+            Tela.imprimirPartida(partida);
         }
         catch (Exception ex)
         {
