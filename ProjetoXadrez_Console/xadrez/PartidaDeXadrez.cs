@@ -32,6 +32,29 @@ internal class PartidaDeXadrez
         {
             capturadas.Add(pecaCapturada);
         }
+
+        // # JogadaEspecial Roque Pequeno 
+        if (p is Rei && destino.coluna == origem.coluna + 2)
+        {
+            Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
+            Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
+
+            Peca T = tab.retirarPeca(origemT);
+            T.incrementarQteMovimentos();
+            tab.colocarPeca(T, destinoT);
+        }
+
+        // # JogadaEspecial Roque Grande 
+        if (p is Rei && destino.coluna == origem.coluna - 2)
+        {
+            Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
+            Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
+
+            Peca T = tab.retirarPeca(origemT);
+            T.incrementarQteMovimentos();
+            tab.colocarPeca(T, destinoT);
+        }
+
         return pecaCapturada;
     }
 
@@ -45,6 +68,28 @@ internal class PartidaDeXadrez
             capturadas.Remove(pecaCapturada);
         }
         tab.colocarPeca(p, origem);
+
+        // # JogadaEspecial Roque Pequeno 
+        if (p is Rei && destino.coluna == origem.coluna + 2)
+        {
+            Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
+            Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
+
+            Peca T = tab.retirarPeca(destinoT);
+            T.decrementarQteMovimentos();
+            tab.colocarPeca(T, origemT);
+        }
+
+        // # JogadaEspecial Roque Grande 
+        if (p is Rei && destino.coluna == origem.coluna - 2)
+        {
+            Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
+            Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
+
+            Peca T = tab.retirarPeca(destinoT);
+            T.decrementarQteMovimentos();
+            tab.colocarPeca(T, origemT);
+        }
     }
 
     public void realizaJogada(Posicao origem, Posicao destino)
@@ -101,7 +146,7 @@ internal class PartidaDeXadrez
         HashSet<Peca> aux = new HashSet<Peca>();
         foreach (Peca x in capturadas)
         {
-            if(x.cor == cor)
+            if (x.cor == cor)
             {
                 aux.Add(x);
             }
@@ -149,7 +194,7 @@ internal class PartidaDeXadrez
         if (R == null)
             throw new TabuleiroException($"Não tem Rei da cor {cor} no tabuleiro!");
 
-        foreach(Peca x in pecasEmJogo(adversaria(cor)))
+        foreach (Peca x in pecasEmJogo(adversaria(cor)))
         {
             bool[,] mat = x.movimentosPossiveis();
             if (mat[R.posicao.linha, R.posicao.coluna])
@@ -195,16 +240,13 @@ internal class PartidaDeXadrez
 
     private void colocarPecas()
     {
-
-
-
-        /*
+        
         colocarNovaPeca('a', 8, new Torre (tab, Cor.Preta));
         colocarNovaPeca('b', 8, new Cavalo(tab, Cor.Preta));
         colocarNovaPeca('c', 8, new Bispo (tab, Cor.Preta));
         colocarNovaPeca('d', 8, new Dama  (tab, Cor.Preta));
-        colocarNovaPeca('e', 8, new Rei   (tab, Cor.Preta));
-        colocarNovaPeca('f', 8, new Bispo (tab, Cor.Preta));
+        colocarNovaPeca('e', 8, new Rei   (tab, Cor.Preta, this));
+        colocarNovaPeca('f', 8, new Bispo(tab, Cor.Preta));
         colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Preta));
         colocarNovaPeca('h', 8, new Torre (tab, Cor.Preta));
         colocarNovaPeca('a', 7, new Peao  (tab, Cor.Preta));
@@ -219,8 +261,8 @@ internal class PartidaDeXadrez
         colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));
         colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Branca));
         colocarNovaPeca('c', 1, new Bispo(tab, Cor.Branca));
-        colocarNovaPeca('d', 1, new Rei(tab, Cor.Branca));
-        colocarNovaPeca('e', 1, new Dama(tab, Cor.Branca));
+        colocarNovaPeca('d', 1, new Dama(tab, Cor.Branca));
+        colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca, this));
         colocarNovaPeca('f', 1, new Bispo(tab, Cor.Branca));
         colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Branca));
         colocarNovaPeca('h', 1, new Torre(tab, Cor.Branca));
@@ -232,6 +274,6 @@ internal class PartidaDeXadrez
         colocarNovaPeca('f', 2, new Peao(tab, Cor.Branca));
         colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca));
         colocarNovaPeca('h', 2, new Peao(tab, Cor.Branca));
-        */
+        
     }
 }
