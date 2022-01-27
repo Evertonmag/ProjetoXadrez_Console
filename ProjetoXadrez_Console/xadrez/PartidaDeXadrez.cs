@@ -107,7 +107,7 @@ internal class PartidaDeXadrez
     public HashSet<Peca> pecasEmJogo(Cor cor)
     {
         HashSet<Peca> aux = new HashSet<Peca>();
-        foreach (Peca x in capturadas)
+        foreach (Peca x in pecas)
         {
             if (x.cor == cor)
             {
