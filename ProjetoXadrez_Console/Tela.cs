@@ -83,7 +83,8 @@ internal class Tela
             {
                 ConsoleColor aux = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                /*Console.BackgroundColor = ConsoleColor.White;*/
+                /*Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.BackgroundColor = ConsoleColor.White;*/
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
@@ -91,7 +92,8 @@ internal class Tela
             {
                 ConsoleColor aux = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                /*Console.BackgroundColor = ConsoleColor.White;*/
+                /*Console.ForegroundColor = ConsoleColor.Gray;
+                Console.BackgroundColor = ConsoleColor.Black;*/
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
