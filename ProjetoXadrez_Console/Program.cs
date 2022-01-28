@@ -14,7 +14,6 @@ internal class Program
             {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
-
                 while (partida.terminada is false)
                 {
                     try
@@ -66,8 +65,8 @@ internal class Program
                 else
                     contPreta++;
 
-                Console.WriteLine("\nGostaria de jogar de novo: ");
-                resp = char.Parse(Console.ReadLine());
+                Console.Write("\nGostaria de jogar de novo: ");
+                resp = char.Parse(Console.ReadLine().ToUpper());
             }
         }
         catch (Exception ex)

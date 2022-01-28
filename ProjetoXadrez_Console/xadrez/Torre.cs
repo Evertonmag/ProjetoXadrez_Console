@@ -7,6 +7,11 @@ internal class Torre : Peca
     {
     }
 
+    public override string ToString()
+    {
+        return "T";
+    }
+
     private bool podeMover(Posicao pos)
     {
         Peca p = tab.peca(pos);
@@ -20,50 +25,53 @@ internal class Torre : Peca
         Posicao pos = new Posicao(0, 0);
 
         // acima
-        pos.definirValores(posicao.linha -1, posicao.coluna);
+        pos.definirValores(posicao.linha - 1, posicao.coluna);
         while (tab.posicaoValida(pos) && podeMover(pos))
         {
             mat[pos.linha, pos.coluna] = true;
             if (tab.peca(pos) != null && tab.peca(pos).cor != cor)
+            {
                 break;
-            pos.linha -= 1;
+            }
+            pos.linha = pos.linha - 1;
         }
 
-        // Abaixo
+        // abaixo
         pos.definirValores(posicao.linha + 1, posicao.coluna);
         while (tab.posicaoValida(pos) && podeMover(pos))
         {
             mat[pos.linha, pos.coluna] = true;
             if (tab.peca(pos) != null && tab.peca(pos).cor != cor)
+            {
                 break;
-            pos.linha += 1;
+            }
+            pos.linha = pos.linha + 1;
         }
 
-        // Direita
+        // direita
         pos.definirValores(posicao.linha, posicao.coluna + 1);
         while (tab.posicaoValida(pos) && podeMover(pos))
         {
             mat[pos.linha, pos.coluna] = true;
             if (tab.peca(pos) != null && tab.peca(pos).cor != cor)
+            {
                 break;
-            pos.coluna += 1;
+            }
+            pos.coluna = pos.coluna + 1;
         }
 
-        // Esquerda
+        // esquerda
         pos.definirValores(posicao.linha, posicao.coluna - 1);
         while (tab.posicaoValida(pos) && podeMover(pos))
         {
             mat[pos.linha, pos.coluna] = true;
             if (tab.peca(pos) != null && tab.peca(pos).cor != cor)
+            {
                 break;
-            pos.coluna -= 1;
+            }
+            pos.coluna = pos.coluna - 1;
         }
 
         return mat;
-    }
-
-    public override string ToString()
-    {
-        return "T";
     }
 }
