@@ -318,7 +318,16 @@ internal class PartidaDeXadrez
 
     private void colocarPecas()
     {
+        /*// Teste de Xeque mate
+        colocarNovaPeca('a', 8, new Rei(tab, Cor.Preta, this));
+        colocarNovaPeca('b', 8, new Torre(tab, Cor.Preta));
 
+        colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca, this));
+        colocarNovaPeca('h', 7, new Torre(tab, Cor.Branca));
+        colocarNovaPeca('b', 2, new Torre(tab, Cor.Branca));
+        */
+
+        
         colocarNovaPeca('a', 8, new Torre(tab, Cor.Preta));
         colocarNovaPeca('b', 8, new Cavalo(tab, Cor.Preta));
         colocarNovaPeca('c', 8, new Bispo(tab, Cor.Preta));
@@ -352,6 +361,5 @@ internal class PartidaDeXadrez
         colocarNovaPeca('f', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('h', 2, new Peao(tab, Cor.Branca, this));
-
     }
 }

@@ -8,42 +8,67 @@ internal class Program
     {
         try
         {
-            PartidaDeXadrez partida = new PartidaDeXadrez();
-
-
-            while (partida.terminada is false)
+            int contBranca = 0, contPreta = 0;
+            char resp = 'S';
+            while (resp == 'S')
             {
-                try
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+
+
+                while (partida.terminada is false)
                 {
-                    Console.Clear();
-                    Tela.imprimirPartida(partida);
+                    try
+                    {
+                        Console.Clear();
 
-                    Console.WriteLine();
-                    Console.Write("Origem: ");
-                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
-                    partida.validarPosicaoDeOrigem(origem);
+                        Console.WriteLine("Placar: ");
+                        Console.Write("Branco [");
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write(contBranca);
+                        Console.ResetColor();
+                        Console.Write("] X [");
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(contPreta);
+                        Console.ResetColor();
+                        Console.Write("] Preta \n\n");
 
-                    bool[,] possicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+                        Tela.imprimirPartida(partida);
 
-                    Console.Clear();
-                    Tela.imprimirTabuleiro(partida.tab, possicoesPossiveis);
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
+                        Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeOrigem(origem);
 
-                    Console.WriteLine();
-                    Console.Write("Destino: ");
-                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
-                    partida.valaidarposicaoDeDestino(origem, destino);
+                        bool[,] possicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
 
-                    partida.realizaJogada(origem, destino);
+                        Console.Clear();
+                        Tela.imprimirTabuleiro(partida.tab, possicoesPossiveis);
 
+                        Console.WriteLine();
+                        Console.Write("Destino: ");
+                        Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.valaidarposicaoDeDestino(origem, destino);
+
+                        partida.realizaJogada(origem, destino);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.ReadLine();
-                }
+                Console.Clear();
+                Tela.imprimirPartida(partida);
+
+                if (partida.jogadorAtual == Cor.Branca)
+                    contBranca++;
+                else
+                    contPreta++;
+
+                Console.WriteLine("\nGostaria de jogar de novo: ");
+                resp = char.Parse(Console.ReadLine());
             }
-            Console.Clear();
-            Tela.imprimirPartida(partida);
         }
         catch (Exception ex)
         {
