@@ -326,7 +326,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 8, new Rei(tab, Cor.Preta, this));
         colocarNovaPeca('f', 8, new Bispo(tab, Cor.Preta));
         colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Preta));
-        colocarNovaPeca('h', 3, new Torre(tab, Cor.Preta));
+        colocarNovaPeca('h', 8, new Torre(tab, Cor.Preta));
         colocarNovaPeca('a', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('b', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('c', 7, new Peao(tab, Cor.Preta, this));
@@ -334,7 +334,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('f', 7, new Peao(tab, Cor.Preta, this));
         colocarNovaPeca('g', 7, new Peao(tab, Cor.Preta, this));
-        colocarNovaPeca('h', 5, new Peao(tab, Cor.Preta, this));
+        colocarNovaPeca('h', 7, new Peao(tab, Cor.Preta, this));
 
         colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));
         colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Branca));
@@ -351,7 +351,7 @@ internal class PartidaDeXadrez
         colocarNovaPeca('e', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('f', 2, new Peao(tab, Cor.Branca, this));
         colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca, this));
-        colocarNovaPeca('h', 7, new Peao(tab, Cor.Branca, this));
+        colocarNovaPeca('h', 2, new Peao(tab, Cor.Branca, this));
 
     }
 }
